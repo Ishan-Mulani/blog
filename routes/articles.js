@@ -1,32 +1,46 @@
-const { application } = require("express")
-const express = require("express")
+const express = require('express')
+const app = express()
 const router = express.Router()
 const Article = require("./../models/schema")
 
+
+// Get request for creating blog
 router.get("/new", (req, res)=>{
-    res.render('new')
+    res.render('new', {article: new Article() })
+})
+ 
+router.get("/:id/edit", async(req, res)=>{
+    const {id} = req.params
+    const article = await Article.findById(id)
+    res.render("edit", {article})
 })
 
-
-
-router.post("/", async (req, res)=>{
-    const article = new Article({
-        title: req.body.title,
-        description: req.body.description,
-        markdown: req.body.markdown
-    })
-    try {
-        await article.save()
-        res.redirect(`articles /${article.id}`)
-    } catch (error) {
-
-        
-    }
-    
+// Get request for detailed blog / showing
+router.get("/:id", async(req, res)=>{
+    const {id} = req.params
+    const article = await Article.findById(id)
+    res.render("show", {article})
 })
 
-router.get("/:id", (req, res)=>{
+// Post request for creating blog
+router.post("/", async(req, res)=>{
+    console.log(req.body)
+    const newArticle = new Article(req.body)
+    await newArticle.save()
+    res.redirect(`/articles/${newArticle._id}`)
+ })
 
+//  Put request for editing blog
+router.put("/:id", async(req, res)=>{
+    const {id} = req.params
+    const article = await Article.findByIdAndUpdate(id, req.body, {runValidators:true, new:true})
+    res.redirect(`/articles/${article._id}`)
 })
 
-module.exports = router
+router.delete("/:id", async(req, res)=>{
+    const {id} = req.params
+    const deletedArticle = await Article.findByIdAndDelete(id)
+    res.redirect("/")
+})
+
+module.exports = router 

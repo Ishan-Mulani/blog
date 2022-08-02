@@ -14,7 +14,7 @@
     <div class="container">
         <h1 class="mb-4">Blog Articles</h1>
         <a class="btn btn-success " href="/articles/new">New Article</a>
-        <% fakeData.forEach(data => { %>
+        <% allArticles.forEach(data => { %>
     
             <div class="card mt-4">
                 <div class="card-body">
@@ -22,14 +22,21 @@
                     <div class="car-subtitle text-muted mb-3">
                         <%= data.createdAt.toLocaleDateString() %> 
                     </div>
-                    <div class="card-text mb-2">
+                    <div class="card-text mb-4">
                         <%= data.description %> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis tempora beatae enim explicabo saepe quod, veritatis ratione inventore delectus cupiditate corporis commodi dicta ullam quis. Debitis ipsa natus nemo tenetur.
                     </div>
+                    <div>
+                        <a href="/articles/<%= data._id %> " class="btn btn-primary">Read More</a>
+                        <a href="/articles/<%= data._id %>/edit" class="btn btn-info">Edit</a>
+                        <form style="display: inline-block;" action="/articles/<%= data._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+
+            
+                        </form>
+                        </div>
+                    </div>
                 </div>
-                <a href="" class="btn btn-primary">Read More</a>
-                <a href="" class="btn btn-info">Edit</a>
-                <a href="" class="btn btn-danger">Delete</a>
-            </div>
+                
         
             <% }); %>
 
