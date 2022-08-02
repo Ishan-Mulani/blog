@@ -20,15 +20,15 @@
                 <div class="card-body">
                     <h4 class="card-title"> <%= data.title %>  </h4>
                     <div class="car-subtitle text-muted mb-3">
-                        <%= data.createdAt.toLocaleDateString() %> 
+                        <%= data.createdAt.toLocaleDateString() %>  
                     </div>
                     <div class="card-text mb-4">
                         <%= data.description %> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis tempora beatae enim explicabo saepe quod, veritatis ratione inventore delectus cupiditate corporis commodi dicta ullam quis. Debitis ipsa natus nemo tenetur.
                     </div>
                     <div>
-                        <a href="/articles/<%= data._id %> " class="btn btn-primary">Read More</a>
-                        <a href="/articles/<%= data._id %>/edit" class="btn btn-info">Edit</a>
-                        <form style="display: inline-block;" action="/articles/<%= data._id %>?_method=DELETE" method="POST">
+                        <a href="/articles/<%= data.slug %> " class="btn btn-primary">Read More</a>
+                        <a href="/articles/<%= data.slug %>/edit" class="btn btn-info">Edit</a>
+                        <form style="display: inline-block;" action="/articles/<%= data.slug %>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>
 
             
