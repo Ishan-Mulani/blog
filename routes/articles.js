@@ -32,16 +32,17 @@ router.post("/", async(req, res)=>{
  })
 
 //  Put request for editing blog
-router.put("/:slug", async(req, res)=>{
-    const {slug} = req.params
-    const article = await Article.findOneAndUpdate({slug: slug}, req.body, {runValidators:true, new:true}) 
-    // might be troublesome
+router.put("/:id", async(req, res)=>{
+    const {id} = req.params
+    const article = await Article.findByIdAndUpdate(id, req.body, {runValidators:true, new:true}) 
+    await article.save()
     res.redirect(`/articles/${article.slug}`)
 })
 
-router.delete("/:slug", async(req, res)=>{
-    const {slug} = req.params
-    const deletedArticle = await Article.findOneAndDelete({slug: slug})
+// Delete blogs
+router.delete("/:id", async(req, res)=>{
+    const {id} = req.params
+    const deletedArticle = await Article.findByIdAndDelete(id)
     res.redirect("/")
 })
 
