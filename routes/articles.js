@@ -31,7 +31,7 @@ router.post("/", async(req, res)=>{
     res.redirect(`/articles/${newArticle.slug}`)
  })
 
-//  Put request for editing blog
+//  Put request for editing blog    
 router.put("/:id", async(req, res)=>{
     const {id} = req.params
     const article = await Article.findByIdAndUpdate(id, req.body, {runValidators:true, new:true}) 

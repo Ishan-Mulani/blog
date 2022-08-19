@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== 'production'){
+   require('dotenv').config()
+}
+
 const express = require('express')
 const app = express()
 const path = require("path")
@@ -7,7 +11,13 @@ const mongoose = require("mongoose")
 const Article = require("./models/schema")
 
 
-mongoose.connect("mongodb://localhost:27017/blog",{useNewUrlParser: true})
+// mongoose.connect("mongodb://localhost:27017/blog",{useNewUrlParser: true})
+mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true})
+const db = mongoose.connection
+db.on('error',error =>console.log(error))
+db.once('open',() =>console.log("Connected to mongoose"))
+
+
 
 app.use(methodOverride("_method"))
 app.use(express.urlencoded({extended: true}))
@@ -28,4 +38,4 @@ app.use("/articles", articleRouter)
 app.get("*", (req, res)=>{
    res.send("Error 404 Not Found")
 })
-app.listen(3000)    
+app.listen(process.env.PORT ||3000)    
