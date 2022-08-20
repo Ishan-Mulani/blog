@@ -42,4 +42,4 @@ app.use("/articles", articleRouter)
 app.get("*", (req, res)=>{
    res.send("Error 404 Not Found")
 })
-app.listen(process.env.PORT ||3000)    
+app.listen(process.env.PORT || 3000)    
