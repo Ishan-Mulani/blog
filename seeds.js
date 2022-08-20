@@ -1,7 +1,11 @@
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const mongoose = require("mongoose")
 const Article = require("./models/schema")
 
-mongoose.connect("mongodb://localhost:27017/blog",{useNewUrlParser: true})
+mongoose.connect(process.env.DATABASE_URL,{useNewUrlParser: true, useUnifiedTopology: true})
     .then(p=>{
         console.log("MOngo connnection ready")
     })
@@ -25,6 +29,7 @@ mongoose.connect("mongodb://localhost:27017/blog",{useNewUrlParser: true})
 //         console.log("error")
 //         console.log(e)
 //     })
+
 
 const fakeData = [
     {
