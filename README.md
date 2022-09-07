@@ -1,4 +1,6 @@
-# blog
+# Blog
+
+CRUD implementation using nodejs, mongoose and mongoDB
 
 Home Page
 ![Screenshot (4)](https://user-images.githubusercontent.com/89037495/188921256-87a25bea-b0fd-4d8c-91f0-a2a1a9a97a22.png)\
